@@ -1,0 +1,77 @@
+openapi: 3.0.3
+info:
+  title: Coding Interview Platform API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+
+paths:
+  /api/health:
+    get:
+      operationId: healthCheck
+      summary: Health check
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok]
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+
+  /api/sessions:
+    post:
+      operationId: createSession
+      summary: Create a new interview session
+      responses:
+        "201":
+          description: Session created
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [sessionId, url]
+                properties:
+                  sessionId:
+                    type: string
+                    example: "c0a8012e-7f5c-4c9a-9c87-3c1b3c7c0f6a"
+                  url:
+                    type: string
+                    example: "http://localhost:5173/session/c0a8012e-7f5c-4c9a-9c87-3c1b3c7c0f6a"
+
+  /api/sessions/{sessionId}:
+    get:
+      operationId: getSession
+      summary: Get session metadata and current code state
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Session state
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [sessionId, language, code]
+                properties:
+                  sessionId:
+                    type: string
+                  language:
+                    type: string
+                    enum: [javascript, python]
+                  code:
+                    type: string
+              example:
+                sessionId: "abc-123"
+                language: "javascript"
+                code: "console.log('hello')"
+        "404":
+          description: Session not found

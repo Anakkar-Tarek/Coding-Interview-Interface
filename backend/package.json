@@ -1,0 +1,23 @@
+{
+  "name": "coding-interview-backend",
+  "version": "1.0.0",
+  "private": "true",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+  "dev": "node server.js",
+  "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5",
+    "uuid": "^9.0.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "jest": "^30.2.0",
+    "supertest": "^7.2.2"
+  }
+}
